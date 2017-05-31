@@ -1,25 +1,30 @@
+var counter =1;
 $(function(){
 	$( '#example' ).photobooth().on( "image", function( event, dataUrl ){
-		$( "#gallery" ).show().html( '<img src="' + dataUrl + '" >');
+		if(counter<5){
+			var node = document.createElement("img");                 												
+			node.setAttribute("class", "alist" + counter); 
+			node.setAttribute("id", "alist" + counter);  
+			// node.setAttribute("width","700px");
+			// node.setAttribute("height","525px");
+			node.setAttribute('src',dataUrl);
+			document.getElementById("gallery").appendChild(node);
+			counter++;	
+		}else {
+			counter = 1;
+			
+			var node = document.createElement("img");                 												
+			node.setAttribute("class", "alist" + counter);  
+			// node.setAttribute("width","700px");
+			// node.setAttribute("height","525px");
+			node.setAttribute('src',dataUrl);
+			document.getElementById("gallery").appendChild(node);
+			counter++;
+		}
+		
 	});
-
-	/**
-	* Tab boxes
-	*/
-	$( '.tab_container' ).each(function( i, elem ){
-		$( elem ).find( ".tabs li" ).click(function(){
-			$( elem ).find( ".tabs li.selected" ).removeClass( "selected" );
-			$( this ).addClass( "selected" );
-			$( elem ).find( ".tab_content" ).hide();
-			$( elem ).find( ".tab_content." + $(this).attr( "calls" ) ).show();
-		});
-	});
-
-	/**
-	* Link highlighting
-	*/
-	$( "a" ).click(function(){
-		$( "#nav a.selected" ).removeClass( "selected" );
-		$( "#nav a[href=" + $(this).attr( "href" ) + "]" ).addClass( "selected" );
-	});
+	
 });
+
+//$( ".gallery div:nth-child(1)").css({'margin-left' : '500px',});
+ 
